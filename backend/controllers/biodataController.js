@@ -110,6 +110,8 @@ export const updateBiodata = async (req, res) => {
       biodataId
     ,{
       templateId, personalInfo, contactInfo, professionalInfo, familyInfo, hobbies, expectations, profilePhoto
+    }, {
+      new: true
     })
 
     res.status(200).json({
