@@ -1,62 +1,146 @@
+export const ClassicTemplate = ({ biodata }) => {
 
-export const ClassicTemplate = ({biodata}) => {
+  const p = biodata?.personalInfo;
+  const c = biodata?.contactInfo;
+  const pro = biodata?.professionalInfo;
+  const f = biodata?.familyInfo;
+
   return (
-    <div>
 
-      <div className="flex flex-col mb-5">
-        <div className="pb-2">Personal Details</div>
-        <div>
-          <div>Name: {biodata?.personalInfo?.name}</div>
-          <div>Age: {biodata?.personalInfo?.age}</div>
-          <div>Height: {biodata?.personalInfo?.height}</div> 
-          <div>complexion: {biodata?.personalInfo?.complexion}</div>
-          <div>religion: {biodata?.personalInfo?.religion}</div>
-          <div>caste: {biodata?.personalInfo?.caste}</div>
-          <div>gotra: {biodata?.personalInfo?.gotra}</div>
-          <div>rashi: {biodata?.personalInfo?.rashi}</div>
-          <div>manglik: {biodata?.personalInfo?.manglik}</div>
+    <div className="max-w-3xl mx-auto bg-white border p-10 space-y-8">
+
+
+      <h1 className="text-3xl font-bold text-center">
+        Biodata
+      </h1>
+
+
+      {biodata?.profilePhoto && (
+
+        <div className="flex justify-center">
+
+          <img
+            src={biodata.profilePhoto}
+            alt="profile"
+            className="w-32 h-32 object-cover border"
+          />
+
         </div>
+
+      )}
+
+
+      <div>
+
+        <h2 className="font-semibold border-b mb-3">
+          Personal Details
+        </h2>
+
+        <div className="grid grid-cols-2 gap-2">
+
+          <p>Name: {p?.name}</p>
+          <p>Age: {p?.age}</p>
+          <p>Height: {p?.height}</p>
+          <p>Complexion: {p?.complexion}</p>
+
+          <p>Religion: {p?.religion}</p>
+          <p>Caste: {p?.caste}</p>
+          <p>Gotra: {p?.gotra}</p>
+          <p>Rashi: {p?.rashi}</p>
+
+          <p>Nakshatra: {p?.nakshatra}</p>
+          <p>Birth Time: {p?.birthTime}</p>
+          <p>Birth Place: {p?.birthPlace}</p>
+          <p>Manglik: {p?.manglik ? "Yes" : "No"}</p>
+
+        </div>
+
       </div>
 
-      <div className="flex flex-col mb-5">
-        <div className="pb-2">professional Info</div>
-        <div>
-          <div>education: {biodata?.professionalInfo?.education}</div> 
-          <div>occupation: {biodata?.professionalInfo?.occupation}</div>
-          <div>salary: {biodata?.professionalInfo?.salary}</div>
+
+      <div>
+
+        <h2 className="font-semibold border-b mb-3">
+          Professional Details
+        </h2>
+
+        <div className="grid grid-cols-2 gap-2">
+
+          <p>Education: {pro?.education}</p>
+          <p>Occupation: {pro?.occupation}</p>
+          <p>Salary: {pro?.salary}</p>
+
         </div>
+
       </div>
 
-      <div className="flex flex-col mb-5">
-        <div>Family Details</div>
-        <div>
-          <div>fatherName: {biodata?.familyInfo?.fatherName}</div>
-          <div>fatherOccupation: {biodata?.familyInfo?.fatherOccupation}</div>
-          <div>motherName: {biodata?.familyInfo?.motherName}</div>
-          <div>motherOccupation: {biodata?.familyInfo?.motherOccupation}</div>
-          <div>brothers: {biodata?.familyInfo?.brothers}</div>
-          <div>sisters: {biodata?.familyInfo?.sisters}</div>
+      <div>
+
+        <h2 className="font-semibold border-b mb-3">
+          Family Details
+        </h2>
+
+        <div className="grid grid-cols-2 gap-2">
+
+          <p>Father Name: {f?.fatherName}</p>
+          <p>Father Occupation: {f?.fatherOccupation}</p>
+
+          <p>Mother Name: {f?.motherName}</p>
+          <p>Mother Occupation: {f?.motherOccupation}</p>
+
+          <p>Brothers: {f?.brothers}</p>
+          <p>Sisters: {f?.sisters}</p>
+
         </div>
+
       </div>
 
-      <div className="flex flex-col mb-5">
-        <div className="pb-2">Contact Details</div>
-        <div>
-          <div>mobileNumber: {biodata?.contactInfo?.mobileNumber}</div>
-          <div>email: {biodata?.contactInfo?.email}</div> 
-          <div>currentAddress: {biodata?.contactInfo?.currentAddress}</div>
-          <div>permanentAddress: {biodata?.contactInfo?.permanentAddress}</div>
-        </div>
+
+      <div>
+
+        <h2 className="font-semibold border-b mb-3">
+          Contact Details
+        </h2>
+
+        {!c?.hideContactInfo ? (
+
+          <div className="space-y-1">
+
+            <p>Mobile: {c?.mobileNumber}</p>
+            <p>Email: {c?.email}</p>
+            <p>Current Address: {c?.currentAddress}</p>
+            <p>Permanent Address: {c?.permanentAddress}</p>
+
+          </div>
+
+        ) : (
+
+          <p className="italic text-gray-500">
+            Contact details hidden for privacy
+          </p>
+
+        )}
+
       </div>
 
-      <div className="flex flex-col mb-5">
-        <div className="pb-2">Other Details</div>
-        <div>
-          <div>hobbies: {biodata?.hobbies}</div>
-          <div>expectations: {biodata?.expectations}</div>
-        </div>
+      <div>
+
+        <h2 className="font-semibold border-b mb-3">
+          Other Details
+        </h2>
+
+        <p>
+          Hobbies: {Array.isArray(biodata?.hobbies)
+            ? biodata.hobbies.join(", ")
+            : biodata?.hobbies}
+        </p>
+
+        <p>
+          Expectations: {biodata?.expectations}
+        </p>
+
       </div>
 
     </div>
-  )
-}
+  );
+};

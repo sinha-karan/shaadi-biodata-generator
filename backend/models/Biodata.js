@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const biodataSchema = new mongoose.Schema({
+
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true
   },
+
   templateId: {
     type: String,
     enum: ["classic", "modern", "premium"]
@@ -20,6 +22,9 @@ const biodataSchema = new mongoose.Schema({
     caste: { type: String, required: true },
     gotra: { type: String, required: true },
     rashi: { type: String },
+    nakshatra: { type: String },
+    birthTime: { type: String },
+    birthPlace: { type: String },
     manglik: { type: Boolean, default: false }
   },
 
@@ -27,7 +32,8 @@ const biodataSchema = new mongoose.Schema({
     mobileNumber: { type: String, required: true },
     email: { type: String },
     currentAddress: { type: String, required: true },
-    permanentAddress: { type: String, required: true }
+    permanentAddress: { type: String, required: true },
+    hideContactInfo: { type: Boolean, default: false }  
   },
 
   professionalInfo: {
@@ -46,16 +52,16 @@ const biodataSchema = new mongoose.Schema({
   },
 
   hobbies: [String],
+
   expectations: { type: String },
+
   profilePhoto: {
-    type: String, 
-    default: 'https://res.cloudinary.com/demo/image/upload/v1/sample.jpg'
+    type: String,
+    default: "https://res.cloudinary.com/demo/image/upload/v1/sample.jpg"
   }
 
-}, { 
-  timestamps: true
-});
+}, { timestamps: true });
 
-const Biodata = mongoose.model('Biodata', biodataSchema);
+const Biodata = mongoose.model("Biodata", biodataSchema);
 
 export default Biodata;
